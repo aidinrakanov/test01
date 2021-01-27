@@ -12,3 +12,5 @@ data class Model(
     var rating: Float,
     var fullInfo: String
 ): Serializable
+
+

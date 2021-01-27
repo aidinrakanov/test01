@@ -47,7 +47,7 @@ class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
     private fun test() {
         listHome.add(
             Model(
-                "https://media.issyk-kul.pro/CACHE/images/hotel/3/3/7b9dd0da-83f8-4cd5-91e5-8f8a6f1f2531/6de5fdc268a37fe5ecaba0b7d6ee6d16.jpg",
+                "https://bestway.kg/wp-content/uploads/2020/08/2-123.jpg",
                 "Голубой Иссык куль",
                 "Чолпон - ата",
                 "круглый год, лечебный",
@@ -65,7 +65,7 @@ class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
         )
         listHome.add(
             Model(
-                "https://media.issyk-kul.pro/CACHE/images/hotel/4/42/d9324d5e-6786-48f5-be00-e8b1722fe637/e391e238f369848649365f4836eebab4.jpg",
+                "https://www.open.kg/uploads/posts/2015-07/1438265502_vip_1658.jpg",
                 "Аврора",
                 "Аврора",
                 "лечебный",
@@ -98,17 +98,17 @@ class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
 
 
             private fun sortByName() {
-                listHome.sortedBy { it.name }
+                listHome.sortBy { it.name }
                 adapter.notifyDataSetChanged()
             }
 
             private fun sortByRating() {
-                listHome.sortedBy { it.cost }
+                listHome.sortBy { it.cost }
                 adapter.notifyDataSetChanged()
             }
 
             private fun sortByPrice() {
-                listHome.sortedBy { it.rating }
+                listHome.sortBy { it.rating }
                 adapter.notifyDataSetChanged()
             }
         }

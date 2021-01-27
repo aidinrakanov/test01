@@ -9,8 +9,9 @@ import com.example.sanatorii.R
 import com.example.sanatorii.model.Model
 import kotlinx.android.synthetic.main.card_list.view.*
 
-class AdapterMain(private val onItemClickListener: OnItemClickListener
-,val list: MutableList<Model>) : RecyclerView.Adapter<AdapterMain.MainVH>() {
+class AdapterMain(
+    private val onItemClickListener: OnItemClickListener, val list: MutableList<Model>
+) : RecyclerView.Adapter<AdapterMain.MainVH>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainVH {
@@ -42,7 +43,7 @@ class AdapterMain(private val onItemClickListener: OnItemClickListener
         }
     }
 
-    interface OnItemClickListener{
+    interface OnItemClickListener {
         fun onClickListener(item: Model)
     }
 }
