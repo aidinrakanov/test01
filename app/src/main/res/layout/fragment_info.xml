@@ -45,7 +45,7 @@
                 android:layout_margin="10dp"
                 android:textSize="25sp"
                 android:textColor="@color/black"
-                android:text="21513c"/>
+                android:text="4000 c"/>
 
             <TextView
                 android:id="@+id/info_adress"
@@ -60,11 +60,40 @@
                 android:textColor="@color/black"
                 android:text="test adress adress adress adress"/>
 
+
+
+            <Button
+                android:id="@+id/info_map"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                app:layout_constraintRight_toLeftOf="@id/info_call"
+                android:layout_marginTop="10dp"
+                android:text="карта"
+                android:textColor="@color/white"
+                android:background="@drawable/button_rounded"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/info_adress"
+                app:layout_constraintLeft_toLeftOf="parent"
+                />
+            <Button
+                android:id="@+id/info_call"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                app:layout_constraintLeft_toRightOf="@id/info_map"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_rounded"
+                android:textColor="@color/white"
+                android:text="    позвонить    "
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/info_adress"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
             <TextView
                 android:id="@+id/info_full_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/info_adress"
+                app:layout_constraintTop_toBottomOf="@+id/info_call"
                 android:text="text text text text text text text text text text text text text text text"
                 android:textSize="18sp"
                 android:textColor="@color/black"
