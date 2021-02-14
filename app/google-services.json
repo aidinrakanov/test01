@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "423430289083",
+    "project_id": "sanatorii-07",
+    "storage_bucket": "sanatorii-07.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423430289083:android:541bc87b33f4cb996adb9e",
+        "android_client_info": {
+          "package_name": "com.example.sanatorii"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "423430289083-p4g2c0eld41rkvi5893u5etlcdoqdf91.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sanatorii",
+            "certificate_hash": "8424695473579789baa6d06b67790b2efd83a50b"
+          }
+        },
+        {
+          "client_id": "423430289083-8frg5dg448kkbe7t6ogk4hmdlmuubq2p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr_I0CIS4onhiwDfSZFd6Y0mgteEhMzPw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "423430289083-8frg5dg448kkbe7t6ogk4hmdlmuubq2p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

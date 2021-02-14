@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
 
-    @SuppressLint("WrongConstant")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,21 +34,3 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-
-//val home = HomeFragment()
-//val favorite = FavoriteFragment()
-//val profile = ProfileFragment()
-//makeCurrentFragment(home)
-//nav_view.setOnNavigationItemSelectedListener {
-//    when(it.itemId){
-//        R.id.navigation_home-> makeCurrentFragment(home)
-//        R.id.navigation_favorites -> makeCurrentFragment(favorite)
-//        R.id.navigation_profile -> makeCurrentFragment(profile)
-//    }
-//    true }
-//
-//private fun makeCurrentFragment(fragment: Fragment) =
-//    supportFragmentManager.beginTransaction().apply {
-//        replace(R.id.nav_host_fragment, fragment)
-//        commit()
-//    }

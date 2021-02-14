@@ -19,7 +19,7 @@ class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
 
     private lateinit var homeAdapter: AdapterMain
     private var listHome: MutableList<Model> = mutableListOf()
-//    private val list: List<Model> = ArrayList<Model>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -100,9 +100,8 @@ class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
                 }
 
                 private fun sortByName() {
-                    Collections.sort(listHome, kotlin.Comparator { t, t2 -> t.name.compareTo(t2.name) })
+                    listHome.sortWith { t, t2 -> t.name.compareTo(t2.name) }
                     homeAdapter.notifyDataSetChanged()
-
                 }
 
                 private fun sortByRating() {

@@ -20,18 +20,25 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.sanatorii.ui.fragments.favorites.FavoriteFragment"
+        android:name="com.example.sanatorii.ui.fragments.profile.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/navigation_favorites"
-        android:name="com.example.sanatorii.ui.fragments.profile.ProfileFragment"
+        android:name="com.example.sanatorii.ui.fragments.favorites.FavoriteFragment"
         android:label="@string/favorites"
         tools:layout="@layout/fragment_favorite" />
+
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.example.sanatorii.ui.fragments.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.sanatorii.firebaseAuth.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>
