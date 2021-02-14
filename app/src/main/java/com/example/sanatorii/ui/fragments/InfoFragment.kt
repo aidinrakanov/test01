@@ -69,5 +69,6 @@ class InfoFragment : Fragment() {
                 .navigate(action)
         }
     }
+
 }
 

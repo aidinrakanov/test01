@@ -1,14 +1,17 @@
 package com.example.sanatorii.ui.fragments.profile
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.sanatorii.firebaseAuth.LoginVM
 import com.example.sanatorii.R
+import com.example.sanatorii.ui.main.MainActivity
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -19,6 +22,7 @@ class ProfileFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -33,7 +37,12 @@ class ProfileFragment : Fragment() {
         observeAuthenticationState()
         prof_log_out.setOnClickListener { AuthUI.getInstance()
             .signOut(requireContext())
-                findNavController().popBackStack()}
+                findNavController().popBackStack()
+            val intent = Intent (requireContext(), MainActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
 
     private fun observeAuthenticationState(){
@@ -45,6 +54,10 @@ class ProfileFragment : Fragment() {
             }
         })
     }
-
-
 }
+//activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,
+//object : OnBackPressedCallback(true) {
+//    override fun handleOnBackPressed() {
+//
+//    }
+//})

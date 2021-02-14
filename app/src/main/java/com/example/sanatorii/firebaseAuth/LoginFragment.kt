@@ -30,20 +30,19 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-            sign_btn.setOnClickListener {
-                launchSignIn()
-            }
+
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
 
     private fun launchSignIn() {
-        val provider = arrayListOf(
-            AuthUI.IdpConfig.GoogleBuilder().build()
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.GoogleBuilder().build(),
+            AuthUI.IdpConfig.AnonymousBuilder().build()
         )
 
         startActivityForResult(
-            AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(provider)
+            AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(providers)
                 .build(), SIGN_IN_RESULT_CODE
         )
     }
@@ -51,7 +50,7 @@ class LoginFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
             if (requestCode == SIGN_IN_RESULT_CODE){
-                val responce = IdpResponse.fromResultIntent(data)
+//                val responce = IdpResponse.fromResultIntent(data)
                     if (requestCode == Activity.RESULT_OK){
 
                     }
@@ -60,6 +59,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
+
+        sign_btn.setOnClickListener { launchSignIn() }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
             navController.popBackStack(R.id.navigation_home, false)

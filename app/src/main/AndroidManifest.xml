@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sanatorii">
-        <activity android:name=".ui.fragments.profile.LoginActivity"></activity>
+        <activity android:name=".ui.IntroActivity"></activity>
+        <activity android:name=".ui.fragments.profile.LoginActivity" />
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
