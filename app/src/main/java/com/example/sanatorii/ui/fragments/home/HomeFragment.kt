@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sanatorii.R
 import com.example.sanatorii.model.Model
 import com.example.sanatorii.ui.fragments.InfoFragment
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
 
@@ -25,6 +28,9 @@ class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            findNavController().navigate(R.id.loginFragment)
+        }
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 

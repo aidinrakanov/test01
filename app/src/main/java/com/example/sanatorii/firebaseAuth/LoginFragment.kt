@@ -14,7 +14,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.sanatorii.R
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.IdpResponse
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {
@@ -49,12 +48,7 @@ class LoginFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-            if (requestCode == SIGN_IN_RESULT_CODE){
-//                val responce = IdpResponse.fromResultIntent(data)
-                    if (requestCode == Activity.RESULT_OK){
 
-                    }
-            }
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -77,5 +71,5 @@ class LoginFragment : Fragment() {
                 }
             }
         })
-    }
+   }
 }

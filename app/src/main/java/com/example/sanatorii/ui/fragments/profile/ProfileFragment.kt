@@ -38,8 +38,6 @@ class ProfileFragment : Fragment() {
         prof_log_out.setOnClickListener { AuthUI.getInstance()
             .signOut(requireContext())
                 findNavController().popBackStack()
-            val intent = Intent (requireContext(), MainActivity::class.java)
-            startActivity(intent)
         }
 
 
@@ -55,9 +53,3 @@ class ProfileFragment : Fragment() {
         })
     }
 }
-//activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,
-//object : OnBackPressedCallback(true) {
-//    override fun handleOnBackPressed() {
-//
-//    }
-//})
