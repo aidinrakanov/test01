@@ -37,10 +37,22 @@ class ProfileFragment : Fragment() {
         observeAuthenticationState()
         prof_log_out.setOnClickListener { AuthUI.getInstance()
             .signOut(requireContext())
-                findNavController().popBackStack()
+                findNavController().navigate(R.id.loginFragment)
         }
+        changeImage1()
+        changeImage2()
 
+    }
 
+    private fun changeImage2() {
+        prof_circle_image.setOnClickListener {
+        }
+    }
+
+    private fun changeImage1() {
+       prof_top_image.setOnClickListener {
+
+       }
     }
 
     private fun observeAuthenticationState(){

@@ -37,7 +37,8 @@ class InfoFragment : Fragment() {
 
     private fun toMap() {
         info_map.setOnClickListener {
-            val uri = String.format(Locale.ENGLISH, "geo:%f,%f", 42.64819715, 77.10169331)
+            var position = item?.geo
+            val uri = String.format(Locale.ENGLISH, "geo:%f,%f", position)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
             startActivity(intent)
         }
@@ -45,9 +46,9 @@ class InfoFragment : Fragment() {
 
     private fun toCall() {
         info_call.setOnClickListener {
-            val numbers = "0706709900".trim()
+            val numbers = item?.tel
             val intent2 = Intent(Intent.ACTION_DIAL)
-            intent2.data = Uri.parse("tel:"+ numbers)
+            intent2.data = Uri.parse("tel:$numbers")
             startActivity(intent2)
         }
     }
@@ -58,7 +59,6 @@ class InfoFragment : Fragment() {
         info_adress.text = item?.adress
         info_name.text = item?.name
         info_full_info.text = item?.fullInfo
-
     }
 
     companion object {
@@ -69,6 +69,7 @@ class InfoFragment : Fragment() {
                 .navigate(action)
         }
     }
+
 
 }
 

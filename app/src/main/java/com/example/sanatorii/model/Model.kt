@@ -1,16 +1,18 @@
 package com.example.sanatorii.model
 
-import android.media.Rating
+import com.google.firebase.firestore.GeoPoint
 import java.io.Serializable
 
 data class Model(
     var images: String,
-    var name: String,
     var adress: String,
-    var info: String,
     var cost: Int,
+    var fullInfo: String,
+    var geo: GeoPoint,
+    var info: String,
+    var name: String,
     var rating: Float,
-    var fullInfo: String
+    var tel: String
 ): Serializable
 
 

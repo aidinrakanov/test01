@@ -7,8 +7,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.*
 import com.example.sanatorii.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -17,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navView: BottomNavigationView
     private lateinit var navController: NavController
+    lateinit var appBarConfiguration: AppBarConfiguration
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +24,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupNavigation()
 
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home,
+                R.id.navigation_favorites,
+                R.id.navigation_profile
+            ))
     }
 
 
@@ -37,11 +43,16 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    override fun onBackPressed() {
-        if (navView.selectedItemId == R.id.navigation_home) {
-            finish()
-        } else {
-            super.onBackPressed()
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+//    override fun onBackPressed() {
+//        if (navView.selectedItemId == R.id.navigation_home) {
+//            finish()
+//        } else {
+//            super.onBackPressed()
+//        }
+//    }
 }

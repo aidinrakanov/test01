@@ -10,7 +10,7 @@ import com.example.sanatorii.model.Model
 import kotlinx.android.synthetic.main.card_list.view.*
 
 class AdapterMain(
-    private val onItemClickListener: OnItemClickListener, val list: MutableList<Model>
+    private val onItemClickListener: OnItemClickListener, private val list: MutableList<Model>
 ) : RecyclerView.Adapter<AdapterMain.MainVH>() {
 
 

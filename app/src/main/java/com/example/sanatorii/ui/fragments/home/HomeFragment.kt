@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sanatorii.R
 import com.example.sanatorii.model.Model
 import com.example.sanatorii.ui.fragments.InfoFragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.GeoPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
 
@@ -38,7 +38,7 @@ class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         recyclerSets()
         setupSort()
-        test()
+//        test()
         main_item_count.text = ("общее количество  " + listHome.size)
 
     }
@@ -57,30 +57,17 @@ class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
             listHome.add(
                 Model(
                     "https://bestway.kg/wp-content/uploads/2020/08/2-123.jpg",
-                    "Голубой Иссык куль",
                     "Чолпон - ата",
+                    2000,
                     "круглый год, лечебный",
-                    2000, (7.0f), ""
+                    GeoPoint(42.64819715,77.10169331),
+                    "Лечебница",
+                    "Голубой Иссык-куль",
+                    7.0f,
+                    "070670900"
                 )
             )
-            listHome.add(
-                Model(
-                    "https://total.kz/storage/96/9656e07cf91c06b07f1696cc77d91b95.jpg",
-                    "Золотые пески",
-                    "Бостери",
-                    "молодежный",
-                    3000, 6.0f, ""
-                )
-            )
-            listHome.add(
-                Model(
-                    "https://www.open.kg/uploads/posts/2015-07/1438265502_vip_1658.jpg",
-                    "Аврора",
-                    "Аврора",
-                    "лечебный",
-                    2500, 5.0f, ""
-                )
-            )
+
         }
 
         private fun setupSort() {
