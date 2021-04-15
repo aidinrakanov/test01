@@ -18,7 +18,7 @@ class Repository {
                 val adress = document.getString("adress")
                 val cost = document.get("cost")
                 val fullinfo = document.getString("fullInfo")
-                val position = document.getGeoPoint("Image")
+                val position = document.getGeoPoint("geoPosition")
                 val info = document.getString("info")
                 val getname = document.getString("name")
                 val rating = document.get("rating")
