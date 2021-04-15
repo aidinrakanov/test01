@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sanatorii.R
@@ -15,12 +16,14 @@ import com.example.sanatorii.ui.fragments.InfoFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.GeoPoint
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.koin.android.ext.android.inject
 import java.util.*
 
 
 class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
 
     private lateinit var homeAdapter: AdapterMain
+    private val viewModel by inject<HomeViewModel>()
     private var listHome: MutableList<Model> = mutableListOf()
 
 
@@ -40,7 +43,15 @@ class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
         setupSort()
 //        test()
         main_item_count.text = ("общее количество  " + listHome.size)
+        observeData()
 
+    }
+
+    private fun observeData() {
+        viewModel.getDB().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            homeAdapter.setDataList(it)
+            homeAdapter.notifyDataSetChanged()
+        })
     }
 
 
@@ -53,22 +64,22 @@ class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
         }
     }
 
-    private fun test() {
-            listHome.add(
-                Model(
-                    "https://bestway.kg/wp-content/uploads/2020/08/2-123.jpg",
-                    "Чолпон - ата",
-                    2000,
-                    "круглый год, лечебный",
-                    GeoPoint(42.64819715,77.10169331),
-                    "Лечебница",
-                    "Голубой Иссык-куль",
-                    7.0f,
-                    "070670900"
-                )
-            )
-
-        }
+//    private fun test() {
+//            listHome.add(
+//                Model(
+//                    "https://bestway.kg/wp-content/uploads/2020/08/2-123.jpg",
+//                    "Чолпон - ата",
+//                    2000,
+//                    "круглый год, лечебный",
+//                    GeoPoint(42.64819715,77.10169331),
+//                    "Лечебница",
+//                    "Голубой Иссык-куль",
+//                    7.0f,
+//                    "070670900"
+//                )
+//            )
+//
+//        }
 
         private fun setupSort() {
             val adapter = ArrayAdapter.createFromResource(
@@ -112,8 +123,7 @@ class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
     override fun onClickListener(item: Model) {
         InfoFragment.start(
             requireActivity(),
-            R.id.action_navigation_home_to_infoFragment, item
-        )
+            R.id.action_navigation_home_to_infoFragment, item)
     }
 
 }

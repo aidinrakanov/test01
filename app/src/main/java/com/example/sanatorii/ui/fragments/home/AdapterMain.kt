@@ -13,6 +13,8 @@ class AdapterMain(
     private val onItemClickListener: OnItemClickListener, private val list: MutableList<Model>
 ) : RecyclerView.Adapter<AdapterMain.MainVH>() {
 
+    private var listData = mutableListOf<Model>()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainVH {
         return MainVH(
@@ -26,6 +28,9 @@ class AdapterMain(
         holder.itemView.setOnClickListener {
             onItemClickListener.onClickListener(list[position])
         }
+    }
+    fun setDataList (datalist: MutableList<Model>){
+        listData = datalist
     }
 
     override fun getItemCount(): Int = list.size
