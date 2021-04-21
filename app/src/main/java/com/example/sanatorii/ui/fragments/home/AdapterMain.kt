@@ -29,8 +29,9 @@ class AdapterMain(
             onItemClickListener.onClickListener(list[position])
         }
     }
-    fun setDataList (datalist: MutableList<Model>){
-        listData = datalist
+    fun setDataList (list: MutableList<Model>){
+        listData = list
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = list.size
@@ -43,8 +44,8 @@ class AdapterMain(
             itemView.card_cost.text = model.cost.toString()
             itemView.card_small_info.text = model.info
             itemView.card_adress_text.text = model.adress
-            itemView.card_rating.rating = model.rating
-            Glide.with(itemView.context).load(model.images).into(itemView.card_image)
+            itemView.card_rating.rating = model.rating!!
+            Glide.with(itemView.context).load(model.image).into(itemView.card_image)
         }
     }
 

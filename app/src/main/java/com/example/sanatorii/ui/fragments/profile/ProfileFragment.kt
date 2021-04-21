@@ -1,7 +1,10 @@
 package com.example.sanatorii.ui.fragments.profile
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +12,8 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.sanatorii.firebaseAuth.LoginVM
 import com.example.sanatorii.R
 import com.example.sanatorii.ui.main.MainActivity
@@ -19,6 +24,8 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 class ProfileFragment : Fragment() {
 
     private val viewModel by viewModels<LoginVM>()
+    private val pickImage = 100
+    private var imageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +53,17 @@ class ProfileFragment : Fragment() {
 
     private fun changeImage2() {
         prof_circle_image.setOnClickListener {
+            val circleImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            startActivityForResult(circleImage, pickImage)
+        }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == pickImage ){
+            imageUri = data?.data
+            prof_circle_image.setImageURI(imageUri)
         }
     }
 

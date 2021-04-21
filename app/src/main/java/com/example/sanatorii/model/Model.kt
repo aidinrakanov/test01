@@ -4,15 +4,15 @@ import com.google.firebase.firestore.GeoPoint
 import java.io.Serializable
 
 data class Model(
-    var images: String,
-    var adress: String,
-    var cost: Int,
-    var fullInfo: String,
-    var geo: GeoPoint,
-    var info: String,
-    var name: String,
-    var rating: Float,
-    var tel: String
+    var adress: String="",
+    var cost: Int? = 0,
+    var fullInfo: String="",
+    var geoPosition: GeoPoint? = null,
+    var image: String="",
+    var info: String="",
+    var name: String="",
+    var rating: Float? = 0.0f,
+    var telephone: String=""
 ): Serializable
 
 

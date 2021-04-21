@@ -1,13 +1,16 @@
 package com.example.sanatorii.repository
 
- sealed class State<T> {
-     class Loading<T> : State<T>()
-     data class Success<T>(val data: T) : State<T>()
-     data class Failed<T>(val message: String) : State<T>()
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.QuerySnapshot
 
-     companion object {
-         fun <T> loading() = Loading<T>()
-         fun <T> success(data: T) = Success(data)
-         fun <T> failed(message: String) = Failed<T>(message)
-     }
+sealed class State<T> {
+    class Loading<T> : State<T>()
+    data class Success<T>(val data: T) : State<T>()
+    data class Failed<T>(val message: String) : State<T>()
+
+    companion object {
+        fun <T> loading() = Loading<T>()
+        fun <T> success(data: T) = Success(data)
+        fun <T> failed(message: String) = Failed<T>(message)
+    }
 }

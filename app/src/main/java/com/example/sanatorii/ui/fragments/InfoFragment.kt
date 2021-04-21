@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +36,7 @@ class InfoFragment : Fragment() {
 
     private fun toMap() {
         info_map.setOnClickListener {
-            var position = item?.geo
+            val position = item?.geoPosition
             val uri = String.format(Locale.ENGLISH, "geo:%f,%f", position)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
             startActivity(intent)
@@ -46,7 +45,7 @@ class InfoFragment : Fragment() {
 
     private fun toCall() {
         info_call.setOnClickListener {
-            val numbers = item?.tel
+            val numbers = item?.telephone
             val intent2 = Intent(Intent.ACTION_DIAL)
             intent2.data = Uri.parse("tel:$numbers")
             startActivity(intent2)
@@ -54,7 +53,7 @@ class InfoFragment : Fragment() {
     }
 
     private fun setData() {
-        Glide.with(info_image.context).load(item?.images).into(info_image)
+        Glide.with(info_image.context).load(item?.image).into(info_image)
         info_cost.text = item?.cost.toString()
         info_adress.text = item?.adress
         info_name.text = item?.name

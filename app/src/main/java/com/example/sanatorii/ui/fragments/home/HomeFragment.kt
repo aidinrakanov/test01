@@ -1,31 +1,38 @@
 package com.example.sanatorii.ui.fragments.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sanatorii.R
 import com.example.sanatorii.model.Model
+import com.example.sanatorii.repository.State
+import com.example.sanatorii.repository.Status
 import com.example.sanatorii.ui.fragments.InfoFragment
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.GeoPoint
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_home.*
-import org.koin.android.ext.android.inject
-import java.util.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
 
     private lateinit var homeAdapter: AdapterMain
-    private val viewModel by inject<HomeViewModel>()
+    private val viewModel: HomeViewModel by viewModel()
     private var listHome: MutableList<Model> = mutableListOf()
-
+    private val db = FirebaseFirestore.getInstance().collection("kurort")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,90 +47,38 @@ class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerSets()
-        setupSort()
-//        test()
-        main_item_count.text = ("общее количество  " + listHome.size)
         observeData()
+        main_item_count.text = ("общее количество  " + listHome.size)
 
     }
 
     private fun observeData() {
-        viewModel.getDB().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            homeAdapter.setDataList(it)
-            homeAdapter.notifyDataSetChanged()
-        })
+        CoroutineScope(Dispatchers.IO).launch {
+            db.get().addOnSuccessListener {
+                for (document in it) {
+                    Log.d("ololo", "${document.id} => ${document.data}")
+                    val model = document.toObject(Model::class.java)
+                    listHome.add(model)
+                    homeAdapter.setDataList(listHome)
+                }
+            }
+        }
     }
-
 
     private fun recyclerSets() {
         homeAdapter = AdapterMain(this, listHome)
         main_recycler.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = homeAdapter
-
         }
     }
 
-//    private fun test() {
-//            listHome.add(
-//                Model(
-//                    "https://bestway.kg/wp-content/uploads/2020/08/2-123.jpg",
-//                    "Чолпон - ата",
-//                    2000,
-//                    "круглый год, лечебный",
-//                    GeoPoint(42.64819715,77.10169331),
-//                    "Лечебница",
-//                    "Голубой Иссык-куль",
-//                    7.0f,
-//                    "070670900"
-//                )
-//            )
-//
-//        }
-
-        private fun setupSort() {
-            val adapter = ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.sort,
-                android.R.layout.simple_spinner_item
-            )
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            main_spinner.adapter = adapter
-
-            main_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    when (view?.id) {
-                        0 -> sortByRating()
-                        1 -> sortByName()
-                        2 -> sortByPrice()
-                    }
-                    adapter.notifyDataSetChanged()
-                }
-
-                override fun onNothingSelected(p0: AdapterView<*>?) {
-                }
-
-                private fun sortByName() {
-                    listHome.sortWith { t, t2 -> t.name.compareTo(t2.name) }
-                    homeAdapter.notifyDataSetChanged()
-                }
-
-                private fun sortByRating() {
-                    listHome.sortBy { it.cost }
-                    homeAdapter.notifyDataSetChanged()
-                }
-
-                private fun sortByPrice() {
-                    listHome.sortBy { it.rating }
-                    homeAdapter.notifyDataSetChanged()
-                }
-            }
-        }
 
     override fun onClickListener(item: Model) {
         InfoFragment.start(
             requireActivity(),
-            R.id.action_navigation_home_to_infoFragment, item)
+            R.id.action_navigation_home_to_infoFragment, item
+        )
     }
 
 }
