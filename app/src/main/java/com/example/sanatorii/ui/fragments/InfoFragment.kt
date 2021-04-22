@@ -36,8 +36,9 @@ class InfoFragment : Fragment() {
 
     private fun toMap() {
         info_map.setOnClickListener {
-            val position = item?.geoPosition
-            val uri = String.format(Locale.ENGLISH, "geo:%f,%f", position)
+            val position_lat = item?.geoPosition?.latitude
+            val position_long = item?.geoPosition?.longitude
+            val uri = String.format(Locale.ENGLISH, "geo:%f,%f", position_lat, position_long)
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
             startActivity(intent)
         }
