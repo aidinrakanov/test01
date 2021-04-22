@@ -36,8 +36,7 @@ class LoginFragment : Fragment() {
 
     private fun launchSignIn() {
         val providers = arrayListOf(
-            AuthUI.IdpConfig.GoogleBuilder().build(),
-            AuthUI.IdpConfig.AnonymousBuilder().build()
+            AuthUI.IdpConfig.GoogleBuilder().build()
         )
 
         startActivityForResult(

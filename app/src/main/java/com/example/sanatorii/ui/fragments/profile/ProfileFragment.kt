@@ -42,13 +42,33 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeAuthenticationState()
-        prof_log_out.setOnClickListener { AuthUI.getInstance()
-            .signOut(requireContext())
-                findNavController().navigate(R.id.loginFragment)
-        }
         changeImage1()
         changeImage2()
 
+    }
+
+    private fun observeAuthenticationState() {
+        viewModel.authenticationState.observe(viewLifecycleOwner,{
+            when (it){
+                LoginVM.AuthenticationState.UNAUTHENTICATED ->{
+                    prof_log_in.visibility = View.VISIBLE
+                    prof_log_out.visibility = View.GONE
+                    prof_log_in.setOnClickListener {
+                        findNavController().navigate(R.id.loginFragment) }
+                }
+                LoginVM.AuthenticationState.AUTHENTICATED ->{
+                    prof_log_in.visibility = View.GONE
+                    prof_log_out.visibility = View.VISIBLE
+                    prof_name.text = FirebaseAuth.getInstance().currentUser?.displayName
+                    prof_email.text = FirebaseAuth.getInstance().currentUser?.email
+                    prof_number.text = FirebaseAuth.getInstance().currentUser?.phoneNumber
+                    prof_log_out.setOnClickListener {
+                        findNavController().navigate(R.id.loginFragment)
+                        AuthUI.getInstance().signOut(requireContext())
+                         }
+                }
+            }
+        })
     }
 
     private fun changeImage2() {
@@ -73,13 +93,5 @@ class ProfileFragment : Fragment() {
        }
     }
 
-    private fun observeAuthenticationState(){
-        viewModel.authenticationState.observe(viewLifecycleOwner, {it->
-            if (it == LoginVM.AuthenticationState.AUTHENTICATED){
-                prof_name.text = FirebaseAuth.getInstance().currentUser?.displayName
-                prof_email.text = FirebaseAuth.getInstance().currentUser?.email
-                prof_number.text = FirebaseAuth.getInstance().currentUser?.phoneNumber
-            }
-        })
-    }
+
 }
