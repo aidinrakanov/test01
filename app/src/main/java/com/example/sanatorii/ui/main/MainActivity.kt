@@ -1,16 +1,13 @@
 package com.example.sanatorii.ui.main
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.app.ActionBar
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
 import com.example.sanatorii.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,11 +24,10 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
-                R.id.navigation_favorites,
+                R.id.navigation_posts,
                 R.id.navigation_profile
             ))
     }
-
 
 
     private fun setupNavigation() {
@@ -47,12 +43,4 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
-//    override fun onBackPressed() {
-//        if (navView.selectedItemId == R.id.navigation_home) {
-//            finish()
-//        } else {
-//            super.onBackPressed()
-//        }
-//    }
 }

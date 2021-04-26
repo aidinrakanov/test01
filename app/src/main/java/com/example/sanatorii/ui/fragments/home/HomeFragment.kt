@@ -59,7 +59,6 @@ class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
                 for (document in it) {
                     Log.d("ololo", "${document.id} => ${document.data}")
                     val model = document.toObject(Model::class.java)
-
                     listHome.add(model)
                     homeAdapter.setDataList(listHome)
                 }

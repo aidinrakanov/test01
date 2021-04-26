@@ -47,7 +47,6 @@ class LoginFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,7 +61,12 @@ class LoginFragment : Fragment() {
             when(it){
                 LoginVM.AuthenticationState.AUTHENTICATED ->{
                     navController.popBackStack()
-                    navController.navigate(R.id.navigation_profile)
+                    navController.navigate(R.id.navigation_home)
+                }
+                LoginVM.AuthenticationState.UNAUTHENTICATED ->{
+                    requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
+                        activity?.finish()
+                    }
                 }
                 LoginVM.AuthenticationState.INVALID_AUTHENTICATION->{
                     Toast.makeText(requireContext(),"Invalid Account",

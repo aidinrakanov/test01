@@ -54,7 +54,7 @@ class ProfileFragment : Fragment() {
                     prof_log_in.visibility = View.VISIBLE
                     prof_log_out.visibility = View.GONE
                     prof_log_in.setOnClickListener {
-                        findNavController().navigate(R.id.loginFragment) }
+                        findNavController().navigate(R.id.navigation_home) }
                 }
                 LoginVM.AuthenticationState.AUTHENTICATED ->{
                     prof_log_in.visibility = View.GONE
