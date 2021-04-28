@@ -20,24 +20,26 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/ppap"/>
 
-            <TextView
-                android:id="@+id/post_info_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/post_info_image"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:textSize="20sp"
-                android:gravity="center"
-                android:layout_marginTop="25sp"
-                android:textStyle="bold"
-                android:text="TEXT TITLE TEXT "/>
+        <TextView
+            android:id="@+id/post_info_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25sp"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="TEXT TITLE TEXT "
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/post_info_image" />
 
         <TextView
             android:id="@+id/post_info_descr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
+            android:fontFamily="serif"
             android:padding="10dp"
             android:text="text description description text description text description text description text description text description text description text description  "
             android:textSize="20sp"
