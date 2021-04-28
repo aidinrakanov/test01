@@ -13,8 +13,8 @@
         <action
             android:id="@+id/action_navigation_home_to_infoFragment"
             app:destination="@id/infoFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
             app:popUpToInclusive="true" />
     </fragment>
 
@@ -35,6 +35,11 @@
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_open_exit"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_navigation_posts_to_uploadFragment"
+            app:destination="@id/uploadFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -53,4 +58,9 @@
         android:name="com.example.sanatorii.ui.fragments.posts.PostsInfoFragment"
         android:label="fragment_postsinfo"
         tools:layout="@layout/fragment_postsinfo" />
+    <fragment
+        android:id="@+id/uploadFragment"
+        android:name="com.example.sanatorii.ui.fragments.posts.UploadFragment"
+        android:label="fragment_upload"
+        tools:layout="@layout/fragment_upload" />
 </navigation>

@@ -19,7 +19,8 @@ class PostsInfoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? { return inflater.inflate(R.layout.fragment_postsinfo, container, false)
+    ): View? {
+        return inflater.inflate(R.layout.fragment_postsinfo, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,7 +32,6 @@ class PostsInfoFragment : Fragment() {
             Glide.with(post_image.context).load(item?.post_image).into(post_image)
             post_text_title.text = item?.post_title.toString()
             post_text_descr.text = item?.post_descr
-            posts_date.text = item?.post_date
     }
 
     companion object {

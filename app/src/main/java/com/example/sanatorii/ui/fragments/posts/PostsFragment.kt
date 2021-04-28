@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sanatorii.R
 import com.example.sanatorii.model.PostsModel
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_posts.*
 
-class PostsFragment: Fragment(), PostAdapter.OnItemClickListener {
+class PostsFragment : Fragment(), PostAdapter.OnItemClickListener {
 
     private lateinit var postsAdapter: PostAdapter
     private var listPosts = mutableListOf<PostsModel>()
@@ -20,29 +21,34 @@ class PostsFragment: Fragment(), PostAdapter.OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_postsinfo, container, false)
+        return inflater.inflate(R.layout.fragment_posts, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recycler_init()
-        if (FirebaseAuth.getInstance().currentUser?.email.equals("altynaikanatbekova@gmail.com")){
-//            fab.visibility = View.VISIBLE
+        if (FirebaseAuth.getInstance().currentUser?.email.equals("altynaikanatbekova@gmail.com")) {
+            upload_btn.visibility = View.VISIBLE
+            upload_btn.setOnClickListener {
+                findNavController().navigate(R.id.uploadFragment)
+            }
         }
-
     }
 
     private fun recycler_init() {
         postsAdapter = PostAdapter(this, listPosts)
         posts_recycler.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = postsAdapter }
+            layoutManager = LinearLayoutManager(activity)
+            adapter = postsAdapter
+        }
 
     }
 
     override fun onClickListener(item: PostsModel) {
-            PostsInfoFragment.start(requireActivity(),
-                R.id.action_navigation_posts_to_postsInfoFragment, item)
+        PostsInfoFragment.start(
+            requireActivity(),
+            R.id.action_navigation_posts_to_postsInfoFragment, item
+        )
     }
 
 }

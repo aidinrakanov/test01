@@ -9,13 +9,16 @@ import com.example.sanatorii.R
 import com.example.sanatorii.model.PostsModel
 import kotlinx.android.synthetic.main.posts_list.view.*
 
-class PostAdapter( private val onItemClickListener: OnItemClickListener,
-                   private val posts_list: MutableList<PostsModel>): RecyclerView.Adapter<PostAdapter.PostsVH>() {
+class PostAdapter
+    ( private val onItemClickListener: OnItemClickListener,
+      private val posts_list: MutableList<PostsModel>
+                   ):RecyclerView.Adapter<PostAdapter.PostsVH>() {
 
     private var postLists = mutableListOf<PostsModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsVH {
-        return PostsVH(LayoutInflater.from(parent.context)
+        return PostsVH(
+            LayoutInflater.from(parent.context)
             .inflate(R.layout.posts_list, parent, false))
     }
 
