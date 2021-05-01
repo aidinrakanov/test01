@@ -29,9 +29,9 @@ class PostsInfoFragment : Fragment() {
     }
 
     private fun setPostData() {
-            Glide.with(post_image.context).load(item?.post_image).into(post_image)
-            post_text_title.text = item?.post_title.toString()
-            post_text_descr.text = item?.post_descr
+            Glide.with(post_image.context).load(item?.image).into(post_image)
+            post_text_title.text = item?.title.toString()
+            post_text_descr.text = item?.desc
     }
 
     companion object {
