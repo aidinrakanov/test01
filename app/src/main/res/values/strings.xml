@@ -5,6 +5,7 @@
     <string name="home">home</string>
     <string name="profile">profile</string>
     <string name="posts">posts</string>
+    <string name="map">карта</string>
 
     <string-array name="sort">
         <item>По рейтингу</item>
