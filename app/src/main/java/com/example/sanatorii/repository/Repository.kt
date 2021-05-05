@@ -1,39 +1,41 @@
 package com.example.sanatorii.repository
 
-import android.util.Log
+import androidx.lifecycle.liveData
 import com.example.sanatorii.model.Model
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 
-//@ExperimentalCoroutinesApi
 class Repository {
+    fun getData() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(null))
+        val eventList = mutableListOf<Model>()
+        val resultList = FirebaseFirestore.getInstance()
+            .collection("kurort")
+            .get().await()
 
+        for (document in resultList) {
+            val adress = document.getString("adress")
+            val cost = document.getLong("cost")
+            val fullInfo = document.getString("fullInfo")
+            val location = document.getGeoPoint("geoPosition")
+            val image = document.getString("image")
+            val info = document.getString("info")
+            val name = document.getString("name")
+            val rating = document.getDouble("rating")
+            val phoneNum = document.getString("telephone")
+            val model = Model(
+                adress, cost?.toInt(), fullInfo, location,
+                image, info, name, rating?.toFloat(), phoneNum
+            )
+            if (model != null) eventList.add(model)
+        }
+        try {
+            if (eventList[0].adress?.isNotEmpty()!!) {
+                emit(Resource.success(eventList))
+            }
+        } catch (e: Exception) {
+            emit(e.message?.let { Resource.error(null, it) })
+        }
+    }
 }
-
-//val ggg = db.get().addOnSuccessListener {
-//    for (document in it) {
-//        Log.d("ololo", "${document.id} => ${document.data}")
-//        val model = document.toObject(Model::class.java) }
-//}
-
-
-
-
-
-//private val db = FirebaseFirestore.getInstance().collection("kurort")
-//
-//fun observeData() = flow<State<List<Model>>>() {
-//    emit(State.loading())
-//
-//    val getDB = db.get().await()
-//    val posts = getDB.toObjects(Model::class.java)
-//
-//    emit(State.success(posts))
-//
-//}.catch {
-//    emit(State.failed(it.message.toString()))
-//}

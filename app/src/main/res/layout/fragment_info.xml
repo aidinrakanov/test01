@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.InfoFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,105 +11,134 @@
         android:layout_height="match_parent">
 
 
-            <ImageView
-                android:id="@+id/info_image"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/test"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/info_image"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/test"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/info_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/info_image"
-                android:textSize="25sp"
-                android:layout_margin="10dp"
-                android:text="text text text text text text"
-                android:textColor="@color/black"
-                android:gravity="center"/>
+        <TextView
+            android:id="@+id/info_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="text text text text text text"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:layout_constraintTop_toBottomOf="@id/info_image" />
 
-            <TextView
-                android:id="@+id/info_cost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/info_name"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_margin="10dp"
-                android:textSize="25sp"
-                android:textColor="@color/black"
-                android:text="4000 c"/>
+        <TextView
+            android:id="@+id/info_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="4000 c"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/info_name" />
 
-            <TextView
-                android:id="@+id/info_adress"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/info_name"
-                app:layout_constraintRight_toLeftOf="@id/info_cost"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_margin="10dp"
-                android:textSize="20sp"
-                android:drawableStart="@drawable/ic_pin2"
-                android:textColor="@color/black"
-                android:text="test adress adress adress adress"/>
+        <TextView
+            android:id="@+id/info_adress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:drawableStart="@drawable/ic_pin2"
+            android:text="test adress adress adress adress"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/info_cost"
+            app:layout_constraintTop_toBottomOf="@id/info_name" />
 
 
+        <Button
+            android:id="@+id/info_map"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_rounded"
+            android:text="@string/map"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/info_call"
+            app:layout_constraintTop_toBottomOf="@id/info_adress" />
 
-            <Button
-                android:id="@+id/info_map"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                app:layout_constraintRight_toLeftOf="@id/info_call"
-                android:layout_marginTop="10dp"
-                android:text="@string/map"
-                android:textColor="@color/white"
-                android:background="@drawable/button_rounded"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/info_adress"
-                app:layout_constraintLeft_toLeftOf="parent"
-                />
-            <Button
-                android:id="@+id/info_call"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                app:layout_constraintLeft_toRightOf="@id/info_map"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/button_rounded"
-                android:textColor="@color/white"
-                android:text="позвонить"
-                android:padding="12dp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/info_adress"
-                app:layout_constraintRight_toRightOf="parent"
-                />
+        <Button
+            android:id="@+id/info_call"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_rounded"
+            android:padding="12dp"
+            android:text="позвонить"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/info_map"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/info_adress" />
 
-            <TextView
-                android:id="@+id/info_full_info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/info_call"
-                android:text="text text text text text text text text text text text text text text text"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:layout_margin="10dp"/>
+        <TextView
+            android:id="@+id/info_full_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="text text text text text text text text text text text text text text text"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/info_call" />
+
+        <RatingBar
+            android:id="@+id/rating"
+            android:layout_width="235dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="100dp"
+            android:min="1"
+            android:rating="1"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:stepSize="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/info_full_info" />
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/info_comments"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:layout_margin="10dp"
             android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/info_full_info"
-            app:layout_constraintLeft_toLeftOf="@id/info_full_info"
-            android:layout_margin="10dp">
+            app:layout_constraintLeft_toLeftOf="@id/rating"
+            app:layout_constraintTop_toBottomOf="@id/rating">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:background="@drawable/edit_rounded2">
+                android:background="@drawable/edit_rounded2"
+                android:orientation="horizontal">
 
+                <EditText
+                    android:id="@+id/leave_feedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top|start"
+                    android:hint="Введите отзыв"
+                    android:padding="10dp"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btn_send_feed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:text="Отправить отзыв"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

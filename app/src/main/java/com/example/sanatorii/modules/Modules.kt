@@ -8,7 +8,9 @@ import org.koin.dsl.module
 
 var appModule = module {
 
-    viewModel { HomeViewModel(get()) }
+    viewModel {
+        HomeViewModel(get())
+    }
 }
 
 val repositoriesModule = module {

@@ -1,7 +1,6 @@
 package com.example.sanatorii.ui.fragments.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +11,7 @@ import com.example.sanatorii.R
 import com.example.sanatorii.model.Model
 import com.example.sanatorii.ui.fragments.InfoFragment
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -24,8 +19,6 @@ class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
 
     private lateinit var homeAdapter: AdapterMain
     private val viewModel: HomeViewModel by viewModel()
-    private var listHome: MutableList<Model> = mutableListOf()
-    private val db = FirebaseFirestore.getInstance().collection("kurort")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,37 +34,31 @@ class HomeFragment : Fragment(), AdapterMain.OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         recyclerSets()
         observeData()
-        main_item_count.text = ("общее количество  " + listHome.size)
-
     }
 
     private fun observeData() {
-        listHome.clear()
-        CoroutineScope(Dispatchers.IO).launch {
-            db.get().addOnSuccessListener {
-                for (document in it) {
-                    Log.d("ololo", "${document.id} => ${document.data}")
-                    val model = document.toObject(Model::class.java)
-                    listHome.add(model)
-                    homeAdapter.setDataList(listHome)
-                }
+        viewModel.getData()
+
+        viewModel.state.observeForever {
+            if (it != null) {
+                homeAdapter.setDataList(it)
+                main_item_count.text = ("общее количество  " + it.size)
             }
         }
     }
 
     private fun recyclerSets() {
-        homeAdapter = AdapterMain(this, listHome)
+        homeAdapter = AdapterMain(this)
         main_recycler.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = homeAdapter
         }
     }
 
-
-    override fun onClickListener(item: Model) {
+    override fun onClickListener(item: Model, position: Int) {
         InfoFragment.start(
             requireActivity(),
-            R.id.action_navigation_home_to_infoFragment, item
+            R.id.action_navigation_home_to_infoFragment, item, position
         )
     }
 

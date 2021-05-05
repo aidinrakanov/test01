@@ -10,7 +10,8 @@ import com.example.sanatorii.model.Model
 import kotlinx.android.synthetic.main.card_list.view.*
 
 class AdapterMain
-    (private val onItemClickListener: OnItemClickListener, private val list: MutableList<Model>
+    (
+    private val onItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<AdapterMain.MainVH>() {
 
     private var listData = mutableListOf<Model>()
@@ -24,17 +25,18 @@ class AdapterMain
     }
 
     override fun onBindViewHolder(holder: MainVH, position: Int) {
-        holder.bind(list[position])
+        holder.bind(listData[position])
         holder.itemView.setOnClickListener {
-            onItemClickListener.onClickListener(list[position])
+            onItemClickListener.onClickListener(listData[position], position)
         }
     }
-    fun setDataList (list: MutableList<Model>){
+
+    fun setDataList(list: MutableList<Model>) {
         listData = list
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = listData.size
 
 
     class MainVH(itemView: View) :
@@ -50,7 +52,7 @@ class AdapterMain
     }
 
     interface OnItemClickListener {
-        fun onClickListener(item: Model)
+        fun onClickListener(item: Model, position: Int)
     }
 }
 

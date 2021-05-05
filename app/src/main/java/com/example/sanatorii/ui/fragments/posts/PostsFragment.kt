@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_posts.*
 class PostsFragment : Fragment(), PostAdapter.OnItemClickListener {
 
     private lateinit var postsAdapter: PostAdapter
-    private val viewModel: PostViewModel by viewModels()
+        private val viewModel: PostViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

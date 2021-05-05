@@ -8,15 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.sanatorii.R
 import com.example.sanatorii.model.Model
+import com.example.sanatorii.utils.isNotEmpty
+import com.example.sanatorii.utils.showToast
 import kotlinx.android.synthetic.main.fragment_info.*
 import java.util.*
 
 
 class InfoFragment : Fragment() {
+    private val viewModel: InfoViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,9 +32,36 @@ class InfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeVM()
         setData()
         toCall()
         toMap()
+        clickListeners()
+    }
+
+    private fun observeVM() {
+        viewModel.isSuccessfully.observeForever {
+            if (it) {
+                findNavController().navigateUp()
+                requireContext().showToast("Успешно отправлено!")
+            } else {
+                requireContext().showToast("Запрос провален!")
+            }
+        }
+    }
+
+    private fun clickListeners() {
+        btn_send_feed.setOnClickListener {
+            if (leave_feedback.isNotEmpty()) {
+                position?.let { it1 ->
+                    viewModel.postRating(
+                        it1,
+                        leave_feedback.text.toString(),
+                        rating.rating.toDouble()
+                    )
+                }
+            }
+        }
     }
 
     private fun toMap() {
@@ -61,8 +93,10 @@ class InfoFragment : Fragment() {
 
     companion object {
         var item: Model? = null
-        fun start(activity: Activity, action: Int, item: Model) {
+        var position: Int? = null
+        fun start(activity: Activity, action: Int, item: Model, position: Int) {
             this.item = item
+            this.position = position
             Navigation.findNavController(activity, R.id.nav_host_fragment)
                 .navigate(action)
         }
